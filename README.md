@@ -1,4 +1,4 @@
 # OPSSprojekt
-# Projekt na opss - pong
 README
+# Projekt na opss - pong
 // PONG jaki jest każdy widzi.
