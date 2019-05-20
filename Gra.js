@@ -10,3 +10,11 @@ function ball()
   this.y = 0;
   this.promien = 5;
   this.kolor = (
+  this.rysuj = function() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.szerokosc, this.dlugosc);
+    ctx.fillStyle = this.kolor;
+    ctx.fill();
+    ctx.closePath();
+  }
+}
