@@ -84,5 +84,5 @@ function PrzyciskPuszczony(e) {
     if (e.keyCode == 76) { pong.gracze[1].w_dol = false; }
 }
  
-document.addEventListener("keydown", keyDownHandler);
-document.addEventListener("keyup", keyUpHandler);
+document.addEventListener("keydown", PrzyciskWcisniety);
+document.addEventListener("keyup", PrzyciskPuszony);
