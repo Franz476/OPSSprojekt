@@ -86,3 +86,61 @@ function PrzyciskPuszczony(e) {
  
 document.addEventListener("keydown", PrzyciskWcisniety);
 document.addEventListener("keyup", PrzyciskPuszony);
+
+function odbver(rect,circle)
+{
+    var dx=Math.abs(circle.x-(rect.x+rect.szerokosc/2));
+    var dy=Math.abs(circle.y-(rect.y+rect.dlugosc/2));
+    if( dx > circle.promien+rect.szerokosc/2 ){ return(false); }
+    if( dy > circle.promien+rect.dlugosc/2 ){ return(false); }
+    if( dx <= rect.szerokosc ){ return(true); }
+    if( dy <= rect.dlugosc ){ return(true); }
+    var dx=dx-rect.szerokosc;
+    var dy=dy-rect.dlugosc
+    return(dx*dx+dy*dy<=circle.promien*circle.promien);
+}
+
+JavaScript
+// wyswietlanie wyniku
+function wyswietlWynik() {
+    ctx.font = "16px Verdana";
+    ctx.fillStyle = "#d46";
+    ctx.textAlign = "left";
+    ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
+    ctx.textAlign = "right";
+    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 20, 20);
+}
+
+// wyswietl naglowek
+function wyswietlNaglowek(tekst) {
+    ctx.font = '20px Verdana';
+    ctx.fillStyle = '#e60';
+    ctx.textAlign = 'center';
+    ctx.fillText(tekst, canvas.width/2, 60);
+}
+
+// wyswietl wskazowki
+function wyswietlWskazowki(tekst) {
+    ctx.font = '14px Verdana';
+    ctx.fillStyle = '#e60';
+    ctx.textAlign = 'center';
+    ctx.fillText(tekst, canvas.width/2, 90);
+}
+
+function Wynik()
+{
+    ctx.font = "16px Verdana";
+    ctx.fillStyle = "#d46";                   //dodać do css 
+    ctx.textAlign = "left";
+    ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
+    ctx.textAlign = "right";
+    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 20, 20);
+}
+
+function Header(tekst)
+{
+    ctx.font = '20px Verdana';
+    ctx.fillStyle = '#e60';           //dodac do css
+    ctx.textAlign = 'center';
+    ctx.fillText(tekst, canvas.width/2, 60);
+}
