@@ -47,7 +47,7 @@ function poczatek()
 {
     pong.stan = 0;  // poczatek 0, gra trwa 1, nowy punkt 2, koniec 3
     pong.pauza= true;
-    pong.pilka = new ball(10, '#d50');
+    pong.ball = new ball(10, '#d50');
     pong.gracze = [];
     pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00
     pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00
@@ -58,11 +58,11 @@ function poczatek()
 
 function reset() 
 {
-    pong.pilka.x = canvas.width/2;
-    pong.pilka.y = canvas.height/2;
+    pong.ball.x = canvas.width/2;
+    pong.ball.y = canvas.height/2;
     pong.pauza = true;
-    pong.pilka.offsetX = 6;
-    pong.pilka.offsetY = 2;
+    pong.ball.offsetX = 6;
+    pong.ball.offsetY = 2;
     pong.gracze[0].x = 0;
     pong.gracze[1].x  = canvas.width - pong.gracze[1].szerokosc;
     pong.gracze[0].y = (canvas.height - pong.gracze[0].dlugosc)/2;
@@ -100,7 +100,6 @@ function odbver(rect,circle)
     return(dx*dx+dy*dy<=circle.promien*circle.promien);
 }
 
-JavaScript
 // wyswietlanie wyniku
 function wyswietlWynik() {
     ctx.font = "16px Verdana";
@@ -129,18 +128,86 @@ function wyswietlWskazowki(tekst) {
 
 function Wynik()
 {
-    ctx.font = "16px Verdana";
-    ctx.fillStyle = "#d46";                   //dodać do css 
-    ctx.textAlign = "left";
     ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
-    ctx.textAlign = "right";
     ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 20, 20);
 }
 
 function Header(tekst)
 {
-    ctx.font = '20px Verdana';
-    ctx.fillStyle = '#e60';           //dodac do css
-    ctx.textAlign = 'center';
     ctx.fillText(tekst, canvas.width/2, 60);
+}
+
+function samouczek(tekst)
+{
+  ctx.fillText(tekst, canvas.width/2, 90);
+}
+
+function game()
+{
+    pong.ball.rysuj();
+    pong.gracze[0].rysuj();
+    pong.gracze[1].rysuj();
+    wynik();
+}
+
+function GraSilnik()
+{
+    pong.ball.x += pong.ball.offsetX;
+    pong.ball.y += pong.ball.offsetY;   //przesuwanie pilki
+ 
+    if (pong.ball.y + pong.ball.promien/2 >= canvas.height || pong.ball.y - pong.ball.promien/2 <= 0)
+    {
+        pong.ball.offsetY = -pong.ball.offsetY;
+    }   //odbijanie od pionowych scian
+ 
+    for (i = 0; i < pong.gracze.length; i++)
+    {
+        if (pong.gracze[i].w_gore && pong.gracze[i].y > 0)  //ruch w gore
+        {
+            pong.gracze[i].y -= pong.gracze[i].offset;
+        }
+ 
+        if (pong.gracze[i].w_dol && pong.gracze[i].y + pong.gracze[i].dlugosc < canvas.height)
+        {
+            pong.gracze[i].y += pong.gracze[i].offset;
+        }         //ruch w dol
+ 
+        if (odbver(pong.gracze[i], pong.ball))
+        {
+            pong.ball.offsetX = -pong.ball.offsetX;
+  
+            if (pong.gracze[i].w_gore)      //przesuniecie gdy paletka sie rusza 
+            { 
+              pong.ball.offsetY--;
+            }
+            if (pong.gracze[i].w_dol)
+            { 
+              pong.ball.offsetY++; 
+            }
+        }
+    }
+ 
+    if (pong.ball.x < pong.gracze[0].szerokosc) //punkt dla prawego gracza
+    {
+        pong.gracze[1].wynik++;
+        pong.stan = 2;
+        pong.pauza = true;
+    }
+ 
+    if (pong.ball.x > canvas.width - pong.gracze[1].szerokosc) //punkt dla lewego gracza
+    {
+        pong.gracze[0].wynik++;
+        pong.stan = 2;
+        pong.pauza = true;
+    }
+ 
+    for (i = 0; i < pong.gracze.length; i++)    //wygrana gracza x
+    {
+        if (pong.gracze[i].wynik == pong.zycia)
+        {
+            pong.stan = 3;
+            pong.pauza = true;
+            pong.zwyciezca = i;
+        }
+    }
 }
