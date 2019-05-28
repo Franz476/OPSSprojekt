@@ -46,11 +46,11 @@ function rect(nazwa, szerokosc, dlugosc, offset, kolor)
 function poczatek() 
 {
     pong.stan = 0;  // poczatek 0, gra trwa 1, nowy punkt 2, koniec 3
-    pong.pauza= true;
+    pong.pauza = true;
     pong.ball = new ball(10, '#d50');
     pong.gracze = [];
-    pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00
-    pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00
+    pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00);
+    pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00);
     pong.zycia = 10;
     pong.zwyciezca = 0;
     reset();
@@ -210,4 +210,49 @@ function GraSilnik()
             pong.zwyciezca = i;
         }
     }
+}
+
+function Game()
+{
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    graRysuj();
+ 
+    if (pong.pauza)
+    {
+        switch(pong.stan)
+        {
+            case 0:
+                Header('Ruch lewy: W,S, a prawy P,L');
+                samouczek('(Wciśnij SPACJĘ)');
+                break;
+            case 2:
+                reset();
+                Header('Zdobyto Punkt!!!');
+                samouczek('PRESS SPACEBAR');
+                break;
+            case 3:
+                reset();
+                Header(pong.gracze[pong.zwyciezca].nazwa + 'zwycieza!!!');
+                samouczek('PRESS SPACEBAR TO PLAY NEW GAME');
+                break;
+            default:
+                Header('STOP');    
+                samouczek('PRESS SPACEBAR TO CONTINUE');
+        }
+    }
+  else
+    {
+        switch(pong.stan) {
+            case 0:
+            case 2:
+                pong.stan = 1;
+                break;
+            case 3:
+                poczatek();
+                break;
+            default:
+                GraSilnik();
+        }
+    }
+    requestAnimationFrame(Game);
 }
