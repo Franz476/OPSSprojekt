@@ -1,6 +1,6 @@
-var canvas = document.GetElementById('Pong');
+var canvas = document.getElementById('Pong');
 var ctx = canvas.getContext('2d');
-var gra = {}; //trzymać będzie wszystkie informacje o stanie gry.
+var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
 
 //konstruktor pilki
 
@@ -12,7 +12,8 @@ function ball()
   this.offsetY = 0,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
   this.kolor = color;   
-  this.rysuj = function() {
+  this.rysuj = function()
+  {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.szerokosc, this.dlugosc);
     ctx.fillStyle = this.kolor;
@@ -49,8 +50,8 @@ function poczatek()
     pong.pauza = true;
     pong.ball = new ball(10, '#d50');
     pong.gracze = [];
-    pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00);
-    pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00);
+    pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00');
+    pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00');
     pong.zycia = 10;
     pong.zwyciezca = 0;
     reset();
@@ -64,13 +65,13 @@ function reset()
     pong.ball.offsetX = 6;
     pong.ball.offsetY = 2;
     pong.gracze[0].x = 0;
-    pong.gracze[1].x  = canvas.width - pong.gracze[1].szerokosc;
+    pong.gracze[1].x = canvas.width - pong.gracze[1].szerokosc;
     pong.gracze[0].y = (canvas.height - pong.gracze[0].dlugosc)/2;
     pong.gracze[1].y = (canvas.height - pong.gracze[1].dlugosc)/2;
 }
 
 function PrzyciskWcisniety(e) {
-    if (e.keyCode == 87) { pong.gracze[0].w_gore true; } else
+    if (e.keyCode == 87) { pong.gracze[0].w_gore = true; } else
     if (e.keyCode == 80) { pong.gracze[1].w_gore = true; } else
     if (e.keyCode == 83) { pong.gracze[0].w_dol = true; } else
     if (e.keyCode == 76) { pong.gracze[1].w_dol = true; } else
@@ -85,7 +86,7 @@ function PrzyciskPuszczony(e) {
 }
  
 document.addEventListener("keydown", PrzyciskWcisniety);
-document.addEventListener("keyup", PrzyciskPuszony);
+document.addEventListener("keyup", PrzyciskPuszczony);
 
 function odbver(rect,circle)
 {
@@ -98,32 +99,6 @@ function odbver(rect,circle)
     var dx=dx-rect.szerokosc;
     var dy=dy-rect.dlugosc
     return(dx*dx+dy*dy<=circle.promien*circle.promien);
-}
-
-// wyswietlanie wyniku
-function wyswietlWynik() {
-    ctx.font = "16px Verdana";
-    ctx.fillStyle = "#d46";
-    ctx.textAlign = "left";
-    ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
-    ctx.textAlign = "right";
-    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 20, 20);
-}
-
-// wyswietl naglowek
-function wyswietlNaglowek(tekst) {
-    ctx.font = '20px Verdana';
-    ctx.fillStyle = '#e60';
-    ctx.textAlign = 'center';
-    ctx.fillText(tekst, canvas.width/2, 60);
-}
-
-// wyswietl wskazowki
-function wyswietlWskazowki(tekst) {
-    ctx.font = '14px Verdana';
-    ctx.fillStyle = '#e60';
-    ctx.textAlign = 'center';
-    ctx.fillText(tekst, canvas.width/2, 90);
 }
 
 function Wynik()
@@ -142,7 +117,7 @@ function samouczek(tekst)
   ctx.fillText(tekst, canvas.width/2, 90);
 }
 
-function game()
+function rysowaniegry()
 {
     pong.ball.rysuj();
     pong.gracze[0].rysuj();
@@ -215,7 +190,7 @@ function GraSilnik()
 function Game()
 {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    graRysuj();
+    rysowaniegry();
  
     if (pong.pauza)
     {
@@ -242,8 +217,7 @@ function Game()
     }
   else
     {
-        switch(pong.stan)
-        {
+        switch(pong.stan) {
             case 0:
             case 2:
                 pong.stan = 1;
