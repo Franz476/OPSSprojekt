@@ -242,7 +242,8 @@ function Game()
     }
   else
     {
-        switch(pong.stan) {
+        switch(pong.stan)
+        {
             case 0:
             case 2:
                 pong.stan = 1;
