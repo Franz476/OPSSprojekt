@@ -11,7 +11,7 @@ function ball()
   this.offsetX = 0,     //przesuniecie pilki w OX
   this.offsetY = 0,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
-  this.kolor = color;   
+  this.kolor = 'rgb(255,255,255)';   
   this.rysuj = function()
   {
     ctx.beginPath();
@@ -231,3 +231,5 @@ function Game()
     }
     requestAnimationFrame(Game);
 }
+poczatek();
+Game();
