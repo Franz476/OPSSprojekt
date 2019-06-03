@@ -122,7 +122,7 @@ function rysowaniegry()
     pong.ball.rysuj();
     pong.gracze[0].rysuj();
     pong.gracze[1].rysuj();
-    wynik();
+    Wynik();
 }
 
 function GraSilnik()
