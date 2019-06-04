@@ -6,12 +6,12 @@ var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
 
 function ball() 
 {
-  this.x = 0;
-  this.y = 0;
+  this.x = 50;
+  this.y = 50;
   this.offsetX = 0,     //przesuniecie pilki w OX
   this.offsetY = 0,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
-  this.kolor = 'rgb(255,255,255)';   
+  this.kolor = 'rgb(0,0,0)';   
   this.rysuj = function()
   {
     ctx.beginPath();
@@ -33,7 +33,7 @@ function rect(nazwa, szerokosc, dlugosc, offset, kolor)
     this.szerokosc = szerokosc;
     this.dlugosc = dlugosc;
     this.offset = offset;
-    this.kolor = color;
+    this.kolor = 'rgb(0,0,0)';
     this.rysuj = function() 
     {
         ctx.beginPath();
@@ -50,8 +50,8 @@ function poczatek()
     pong.pauza = true;
     pong.ball = new ball(10, '#d50');
     pong.gracze = [];
-    pong.gracze[0] = new rect('Player 1',  15, 60, 7, '#ffcc00');
-    pong.gracze[1] = new rect('Player 2', 15, 60, 7, '#ffcc00');
+    pong.gracze[0] = new rect('Player 1',  15, 60, 7);
+    pong.gracze[1] = new rect('Player 2', 15, 60, 7);
     pong.zycia = 10;
     pong.zwyciezca = 0;
     reset();
