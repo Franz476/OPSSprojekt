@@ -1,6 +1,11 @@
 body {
-background: black;
-font-family: 'Acrade Classic';
-font-size: 24 px;
+background-image: linear-gradient(to right bottom, #e3228f, #d54cb1, #c169cb, #ab80dd, #9693e6, #83a3f1, #73b2f6, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+font-family: 'Pacifico', cursive;
 background-posision: center;
+color: white;
+}
+
+#h1 {
+  text-align: center;
+  font-size: 300%;
 }
