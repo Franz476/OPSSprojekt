@@ -6,8 +6,8 @@ var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
 
 function ball() 
 {
-  this.x = 50;
-  this.y = 50;
+  this.x = 0;
+  this.y = 0;
   this.offsetX = 0,     //przesuniecie pilki w OX
   this.offsetY = 0,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
