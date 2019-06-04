@@ -8,10 +8,10 @@ function ball()
 {
   this.x = 0;
   this.y = 0;
-  this.offsetX = 0,     //przesuniecie pilki w OX
-  this.offsetY = 0,     //przesuniecie pilki w OY
+  this.offsetX = 10,     //przesuniecie pilki w OX
+  this.offsetY = 10,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
-  this.kolor = 'rgb(0,0,0)';   
+  this.kolor = 'rgb(0,0,0)';
   this.rysuj = function()
   {
     ctx.beginPath();
@@ -33,7 +33,7 @@ function rect(nazwa, szerokosc, dlugosc, offset, kolor)
     this.szerokosc = szerokosc;
     this.dlugosc = dlugosc;
     this.offset = offset;
-    this.kolor = 'rgb(0,0,0)';
+    this.kolor = 'rgb(255,255,255)';
     this.rysuj = function() 
     {
         ctx.beginPath();
@@ -55,6 +55,8 @@ function poczatek()
     pong.zycia = 10;
     pong.zwyciezca = 0;
     reset();
+	pong.gracze[0].wynik = 0;
+	pong.gracze[1].wynik = 0;
 }
 
 function reset() 
@@ -92,10 +94,22 @@ function odbver(rect,circle)
 {
     var dx=Math.abs(circle.x-(rect.x+rect.szerokosc/2));
     var dy=Math.abs(circle.y-(rect.y+rect.dlugosc/2));
-    if( dx > circle.promien+rect.szerokosc/2 ){ return(false); }
-    if( dy > circle.promien+rect.dlugosc/2 ){ return(false); }
-    if( dx <= rect.szerokosc ){ return(true); }
-    if( dy <= rect.dlugosc ){ return(true); }
+    if( dx > circle.promien+rect.szerokosc/2 )
+	{ 
+		return(false); 
+	}
+    if( dy > circle.promien+rect.dlugosc/2 )
+	{
+		return(false);
+	}
+    if( dx <= rect.szerokosc )
+	{
+		return(true);
+	}
+    if( dy <= rect.dlugosc )
+	{
+		return(true); 
+	}
     var dx=dx-rect.szerokosc;
     var dy=dy-rect.dlugosc
     return(dx*dx+dy*dy<=circle.promien*circle.promien);
@@ -104,7 +118,7 @@ function odbver(rect,circle)
 function Wynik()
 {
     ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
-    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 20, 20);
+    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 50, 20);
 }
 
 function Header(tekst)
@@ -207,7 +221,7 @@ function Game()
                 break;
             case 3:
                 reset();
-                Header(pong.gracze[pong.zwyciezca].nazwa + 'zwycieza!!!');
+                Header(pong.gracze[pong.zwyciezca].nazwa + ' ' + 'zwycieza!!!');
                 samouczek('PRESS SPACEBAR TO PLAY NEW GAME');
                 break;
             default:
