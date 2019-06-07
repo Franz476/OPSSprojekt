@@ -1,6 +1,8 @@
 var canvas = document.getElementById('Pong');
 var ctx = canvas.getContext('2d');
 var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
+canvas.width = window.innerWidth * 0.95;
+canvas.height = window.innerHeight * 0.8;
 
 //konstruktor pilki
 
@@ -11,11 +13,11 @@ function ball()
   this.offsetX = 10,     //przesuniecie pilki w OX
   this.offsetY = 10,     //przesuniecie pilki w OY
   this.promien = 5;     //rozmiar pilki
-  this.kolor = 'rgb(0,0,0)';
+  this.kolor = 'rgb(255,255,255)';
   this.rysuj = function()
   {
     ctx.beginPath();
-    ctx.rect(this.x, this.y, this.szerokosc, this.dlugosc);
+    ctx.arc(this.x, this.y, this.promien, 0, Math.PI*2);
     ctx.fillStyle = this.kolor;
     ctx.fill();
     ctx.closePath();
@@ -50,8 +52,8 @@ function poczatek()
     pong.pauza = true;
     pong.ball = new ball(10, '#d50');
     pong.gracze = [];
-    pong.gracze[0] = new rect('Player 1',  15, 60, 7);
-    pong.gracze[1] = new rect('Player 2', 15, 60, 7);
+    pong.gracze[0] = new rect('Player 1',  15, 120, 7);
+    pong.gracze[1] = new rect('Player 2', 15, 120, 7);
     pong.zycia = 10;
     pong.zwyciezca = 0;
     reset();
