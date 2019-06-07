@@ -3,9 +3,16 @@ background-image: linear-gradient(to right bottom, #e3228f, #d54cb1, #c169cb, #a
 font-family: 'Pacifico', cursive;
 background-posision: center;
 color: white;
+width: 100%;
+height: 100%;
 }
 
 #h1 {
   text-align: center;
   font-size: 300%;
+}
+
+html {
+width: 100%;
+height: 100%;
 }
