@@ -1,8 +1,8 @@
 var canvas = document.getElementById('Pong');
 var ctx = canvas.getContext('2d');
 var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
-canvas.width = window.innerWidth * 0.95;
-canvas.height = window.innerHeight * 0.8;
+canvas.width = window.innerWidth - 16;
+canvas.height = window.innerHeight * 0.87;
 
 //konstruktor pilki
 
@@ -12,8 +12,8 @@ function ball()
   this.y = 0;
   this.offsetX = 10,     //przesuniecie pilki w OX
   this.offsetY = 10,     //przesuniecie pilki w OY
-  this.promien = 5;     //rozmiar pilki
-  this.kolor = 'rgb(255,255,255)';
+  this.promien = 10;     //rozmiar pilki
+  this.kolor = 'rgb(0,0,0)';
   this.rysuj = function()
   {
     ctx.beginPath();
@@ -119,18 +119,25 @@ function odbver(rect,circle)
 
 function Wynik()
 {
+	ctx.font = '30px Lato';
+	ctx.textAlign = 'left';
     ctx.fillText(pong.gracze[0].nazwa + ": " + pong.gracze[0].wynik, 20, 20);
-    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - 50, 20);
+	ctx.textAlign = 'right';
+    ctx.fillText(pong.gracze[1].nazwa + ": " + pong.gracze[1].wynik, canvas.width - pong.gracze[1].szerokosc, 20);
 }
 
 function Header(tekst)
 {
+	ctx.font = '20px Lato';
+	ctx.textAlign = 'center';
     ctx.fillText(tekst, canvas.width/2, 60);
 }
 
 function samouczek(tekst)
 {
-  ctx.fillText(tekst, canvas.width/2, 90);
+	ctx.font = '20px Lato';
+	ctx.textAlign = 'center';
+	ctx.fillText(tekst, canvas.width/2, 90);
 }
 
 function rysowaniegry()
