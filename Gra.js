@@ -6,7 +6,7 @@ canvas.height = window.innerHeight * 0.87;
 var AJakPan = document.getElementById("AjakPanJezus");
 var TakJakPan = document.getElementById("TakJakPanJezus");
 var BadzmyLagodni = document.getElementById("BadzmyLagodni");
-var Licznik = 0;
+var Licznik = 1;
 
 function PaPa()
 {
