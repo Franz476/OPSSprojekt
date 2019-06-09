@@ -1,5 +1,5 @@
 # OPSSprojekt
-README
+Gra dostępna pod adresem: https://wwwold.fizyka.umk.pl/~296753/OPSS2/
 # Projekt na opss - pong
 PONG jaki jest każdy widzi.
 # Mam nadzieję, że zadziała //działa :)
