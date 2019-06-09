@@ -3,6 +3,23 @@ var ctx = canvas.getContext('2d');
 var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
 canvas.width = window.innerWidth - 16;
 canvas.height = window.innerHeight * 0.87;
+var AJakPan = document.getElementById("AjakPanJezus");
+var TakJakPan = document.getElementById("TakJakPanJezus");
+var BadzmyLagodni = document.getElementById("BadzmyLagodni");
+var Licznik = 0;
+
+function PaPa()
+{
+	if(Licznik % 2 == 1)
+	{
+		AJakPan.play();
+	}
+	else
+	{
+		TakJakPan.play();
+	}
+}
+
 
 //konstruktor pilki
 
@@ -156,7 +173,7 @@ function GraSilnik()
     if (pong.ball.y + pong.ball.promien/2 >= canvas.height || pong.ball.y - pong.ball.promien/2 <= 0)
     {
         pong.ball.offsetY = -pong.ball.offsetY;
-    }   //odbijanie od pionowych scian
+    }   //odbijanie od poziomych scian
  
     for (i = 0; i < pong.gracze.length; i++)
     {
@@ -182,6 +199,8 @@ function GraSilnik()
             { 
               pong.ball.offsetY++; 
             }
+			PaPa();
+			Licznik = Licznik + 1;
         }
     }
  
@@ -206,6 +225,7 @@ function GraSilnik()
             pong.stan = 3;
             pong.pauza = true;
             pong.zwyciezca = i;
+			BadzmyLagodni.play();			
         }
     }
 }
