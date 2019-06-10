@@ -2,22 +2,17 @@ var canvas = document.getElementById('Pong');
 var ctx = canvas.getContext('2d');
 var pong = {}; //trzymać będzie wszystkie informacje o stanie gry.
 canvas.width = window.innerWidth - 16;
-canvas.height = window.innerHeight * 0.87;
-var AJakPan = document.getElementById("AjakPanJezus");
-var TakJakPan = document.getElementById("TakJakPanJezus");
-var BadzmyLagodni = document.getElementById("BadzmyLagodni");
+canvas.height = window.innerHeight * 0.85;
+var Odbicie = document.getElementById("Odbicie");
+var OdbiciePoziome = document.getElementById("OdbiciePoziome");
+var Win = document.getElementById("Win");
+var Punkt = document.getElementById("Punkt");
+
 var Licznik = 1;
 
 function PaPa()
 {
-	if(Licznik % 2 == 1)
-	{
-		AJakPan.play();
-	}
-	else
-	{
-		TakJakPan.play();
-	}
+	Odbicie.play();
 }
 
 
@@ -29,7 +24,7 @@ function ball()
   this.y = 0;
   this.offsetX = 10,     //przesuniecie pilki w OX
   this.offsetY = 10,     //przesuniecie pilki w OY
-  this.promien = 10;     //rozmiar pilki
+  this.promien = 7;     //rozmiar pilki
   this.kolor = 'rgb(0,0,0)';
   this.rysuj = function()
   {
@@ -173,6 +168,7 @@ function GraSilnik()
     if (pong.ball.y + pong.ball.promien/2 >= canvas.height || pong.ball.y - pong.ball.promien/2 <= 0)
     {
         pong.ball.offsetY = -pong.ball.offsetY;
+		OdbiciePoziome.play();
     }   //odbijanie od poziomych scian
  
     for (i = 0; i < pong.gracze.length; i++)
@@ -189,7 +185,7 @@ function GraSilnik()
  
         if (odbver(pong.gracze[i], pong.ball))
         {
-            pong.ball.offsetX = -pong.ball.offsetX;
+            pong.ball.offsetX = -pong.ball.offsetX * (0.04 * Licznik + 1);
   
             if (pong.gracze[i].w_gore)      //przesuniecie gdy paletka sie rusza 
             { 
@@ -209,6 +205,7 @@ function GraSilnik()
         pong.gracze[1].wynik++;
         pong.stan = 2;
         pong.pauza = true;
+		Punkt.play();
     }
  
     if (pong.ball.x > canvas.width - pong.gracze[1].szerokosc) //punkt dla lewego gracza
@@ -216,6 +213,7 @@ function GraSilnik()
         pong.gracze[0].wynik++;
         pong.stan = 2;
         pong.pauza = true;
+		Punkt.play();
     }
  
     for (i = 0; i < pong.gracze.length; i++)    //wygrana gracza x
@@ -225,7 +223,7 @@ function GraSilnik()
             pong.stan = 3;
             pong.pauza = true;
             pong.zwyciezca = i;
-			BadzmyLagodni.play();			
+			Win.play();			
         }
     }
 }
