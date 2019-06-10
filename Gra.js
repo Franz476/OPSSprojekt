@@ -185,7 +185,7 @@ function GraSilnik()
  
         if (odbver(pong.gracze[i], pong.ball))
         {
-            pong.ball.offsetX = -pong.ball.offsetX * (0.04 * Licznik + 1);
+            pong.ball.offsetX = -pong.ball.offsetX;
   
             if (pong.gracze[i].w_gore)      //przesuniecie gdy paletka sie rusza 
             { 
